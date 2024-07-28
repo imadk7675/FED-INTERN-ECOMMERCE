@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="styl.css">
+</head>
+<body>
+    <header>
+        <h1>AMVN LEATHER SHOE</h1>
+        <nav>
+            <a href="home.html">Home</a>
+            <a href="about_us.html">About Us</a>
+            <a href="contact_us.html">Contact Us</a>
+            <a href="cart.html" class="cart">Cart (0)</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Shopping Cart</h2>
+        <div class="cart-items" id="cart-items">
+            <!-- Cart items will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var cartItems = JSON.parse(sessionStorage.getItem('cartItems')) || [];
+            var cartContainer = document.getElementById('cart-items');
+
+            // Function to display cart items
+            function displayCartItems() {
+                cartContainer.innerHTML = ''; // Clear previous content
+
+                if (cartItems.length === 0) {
+                    cartContainer.innerHTML = '<p>Your cart is empty.</p>';
+                } else {
+                    cartItems.forEach(function (item, index) {
+                        var itemDiv = document.createElement('div');
+                        itemDiv.classList.add('cart-item');
+
+                        var itemName = document.createElement('h3');
+                        itemName.textContent = item.name;
+
+                        var itemImage = document.createElement('img');
+                        itemImage.src = item.image;
+                        itemImage.alt = item.name;
+
+                        var itemColor = document.createElement('p');
+                        itemColor.innerHTML = '<strong>Color:</strong> ' + item.color;
+
+                        var itemSize = document.createElement('p');
+                        itemSize.innerHTML = '<strong>Size:</strong> ' + item.size;
+
+                        var itemPrice = document.createElement('p');
+                        itemPrice.innerHTML = '<strong>Price:</strong> $' + item.price;
+
+                        // Create remove button
+                        var removeButton = document.createElement('button');
+                        removeButton.textContent = 'Remove';
+                        removeButton.addEventListener('click', function () {
+                            cartItems.splice(index, 1); // Remove item from cartItems array
+                            sessionStorage.setItem('cartItems', JSON.stringify(cartItems)); // Update session storage
+                            displayCartItems(); // Re-display cart items
+                        });
+
+                        // Create buy button
+                        var buyButton = document.createElement('button');
+                        buyButton.textContent = 'Buy';
+                        buyButton.addEventListener('click', function () {
+    // Prepare data to be sent to the backend
+                    var formData = new FormData();
+                    formData.append('name', item.name);
+                    formData.append('image', item.image);
+                    formData.append('color', item.color);
+                    formData.append('size', item.size);
+                    formData.append('price', item.price);
+
+                    // Send a POST request to the backend endpoint
+                    fetch('build.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            // Redirect to the shipping page
+                            window.location.href = 'shipping.html';
+                        } else {
+                            console.error('Failed to store product data in the database');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                });
+
+
+                        // Append elements to cart item div
+                        itemDiv.appendChild(itemName);
+                        itemDiv.appendChild(itemImage);
+                        itemDiv.appendChild(itemColor);
+                        itemDiv.appendChild(itemSize);
+                        itemDiv.appendChild(itemPrice);
+                        itemDiv.appendChild(removeButton); // Add remove button to cart item
+                        itemDiv.appendChild(buyButton); // Add buy button to cart item
+
+                        cartContainer.appendChild(itemDiv);
+                    });
+                }
+            }
+
+            displayCartItems(); // Display cart items when the page loads
+        });
+    </script>
+</body>
+</html>

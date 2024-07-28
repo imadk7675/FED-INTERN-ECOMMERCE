@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipping Information</title>
+    <link rel="stylesheet" href="shippingstyle.css">
+</head>
+<body>
+    <header>
+        <h1>Shipping Information</h1>
+        <nav>
+            <a href="home.html">Home</a>
+            <a href="about_us.html">About Us</a>
+            <a href="contact_us.html">Contact Us</a>
+            <a href="cart.html" class="cart">Cart (0)</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="shipping-form">
+            <form id="shippingForm" action="shipping.php" method="POST">
+                <label for="customer_name">Customer Name:</label>
+                <input type="text" id="customer_name" name="customer_name" required><br>
+                <label for="phone_number">Phone Number:</label>
+                <input type="text" id="phone_number" name="phone_number" required><br>
+                <label for="shipping_address">Shipping Address:</label>
+                <textarea id="shipping_address" name="shipping_address" required></textarea><br>
+                <label for="shipping_date">Shipping Date:</label>
+                <input type="date" id="shipping_date" name="shipping_date" required><br>
+                <button type="submit" class="submit-button">Submit</button>
+            </form>
+        </div>
+    </div>
+
+   
+    
+</body>
+</html>

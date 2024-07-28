@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leather Shoe Website - Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>AMVN LEATHER SHOE</h1>
+        <nav>
+            <a href="home.html">Home</a>
+            <a href="about_us.html">About Us</a>
+            <a href="contact_us.html">Contact Us</a>
+            <a href="cart.html" class="cart">Cart (0)</a> <!-- Modified to direct to cart.php -->
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Shoe Collection</h2>
+        <div class="shoe-collection">
+            <!-- Sample Shoe 1 -->
+            <div class="shoe">
+                <h3>Shoe Name 1</h3>
+                <img src="shoe1.jpg" alt="Shoe 1">
+                <p>Color:</p>
+                <select class="shoeColor"> <!-- Added class for color selection -->
+                    <option value="Black">Black</option>
+                    <option value="Brown">Brown</option>
+                </select> 
+                <p>Price: $20</p> <!-- Modified to include price -->
+                <p>Size:</p>
+                <select class="shoeSize">
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select>
+                
+                <a href="#" class="add-to-cart" data-id="1">Add to Cart</a>
+            </div>
+            <!-- Add more shoes similarly -->
+        
+            <div class="shoe">
+                <h3>Shoe Name 2</h3>
+                <img src="shoe 2.jpeg" alt="Shoe 1">
+                <p>Color:</p>
+                <select class="shoeColor"> <!-- Added class for color selection -->
+                    <option value="Black">Black</option>
+                    <option value="Brown">Brown</option>
+                </select> 
+                <p>Price:$40</p> <!-- Modified to include price -->
+                <p>Size:</p>
+                <select class="shoeSize">
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select>
+                
+                <a href="#" class="add-to-cart" data-id="3">Add to Cart</a>
+            </div>
+            <div class="shoe">
+                <h3>Shoe Name 3</h3>
+                <img src="shoe3.jpeg" alt="Shoe 1">
+                <p>Color:</p>
+                <select class="shoeColor"> <!-- Added class for color selection -->
+                    <option value="Black">Black</option>
+                    <option value="Brown">Brown</option>
+                </select> 
+                <p>Price:$30</p> <!-- Modified to include price -->
+                <p>Size:</p>
+                <select class="shoeSize">
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select>
+                
+                <a href="#" class="add-to-cart" data-id="4">Add to Cart</a>
+            </div>
+            <div class="shoe">
+                <h3>Shoe Name 4</h3>
+                <img src="shoe4.jpeg" alt="Shoe 1">
+                <p>Color:</p>
+                <select class="shoeColor"> <!-- Added class for color selection -->
+                    <option value="Black">Black</option>
+                    <option value="Brown">Brown</option>
+                </select> 
+                <p>Price:$50</p> <!-- Modified to include price -->
+                <p>Size:</p>
+                <select class="shoeSize">
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select>
+                
+                <a href="#" class="add-to-cart" data-id="1">Add to Cart</a>
+            </div>
+            <!-- Add more shoes similarly -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get all 'Add to Cart' links
+            var addToCartButtons = document.querySelectorAll('.add-to-cart');
+
+            // Attach click event listener to each button
+            addToCartButtons.forEach(function (button) {
+                button.addEventListener('click', function (event) {
+                    event.preventDefault();
+
+                    // Get shoe details
+                    var shoeName = button.parentElement.querySelector('h3').innerText;
+                    var shoeImage = button.parentElement.querySelector('img').src;
+                    var selectedSize = button.parentElement.querySelector('.shoeSize').value;
+                    var selectedColor = button.parentElement.querySelector('.shoeColor').value; // Added color selection
+
+                    // Create shoe object
+                    var shoe = {
+                        name: shoeName,
+                        image: shoeImage,
+                        size: selectedSize,
+                        color: selectedColor, // Added color
+                        price: 20 // Hardcoded price for now
+                    };
+
+                    // Store shoe data in session storage
+                    var cartItems = JSON.parse(sessionStorage.getItem('cartItems')) || [];
+                    cartItems.push(shoe);
+                    sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
+
+                    // Update cart count
+                    updateCartCount(cartItems.length);
+                });
+            });
+
+            // Function to update cart count in navigation
+            function updateCartCount(count) {
+                var cartLink = document.querySelector('.cart');
+                cartLink.textContent = 'Cart (' + count + ')';
+            }
+        });
+    </script>
+</body>
+</html>

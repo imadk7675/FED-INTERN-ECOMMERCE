@@ -1,0 +1,113 @@
+/* Global styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: black;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 0;
+  text-align: center;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+h3 {
+  color: #fff;
+}
+
+p{
+  color: white;
+}
+.shoe-collection {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  
+}
+
+.shoe {
+  width: 250px;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: transform 0.3s ease;
+}
+
+.shoe img {
+  width: 100%;
+  height: 200px;
+  margin-bottom: 10px;
+  display: block;
+  
+}
+
+.add-to-cart {
+  display: block;
+  width: 100%;
+  background-color: burlywood;
+  color: #fff;
+  text-align: center;
+  padding: 8px 0;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.add-to-cart:hover {
+  background-color: #555;
+}
+
+/* Form styles */
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"],
+textarea,
+select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+button[type="submit"] {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #555;
+}
+
